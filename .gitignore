@@ -1,0 +1,9 @@
+# Ignorar arquivos de compilação e temporários do MasterTool / CoDeSys
+*.ci
+*.boot
+*.compileinfo
+*.rc
+*.bpd
+
+# Ignorar cópias de segurança automáticas
+*.asd

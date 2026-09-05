@@ -1,0 +1,8 @@
+LIBRARY
+Iecsfc.lib 26.11.08 09:46:14
+(* @LIBRARYSYMFILEINFO := '0' *)
+NumOfPOUs: 1
+SFCActionControl: 0
+NumOfGVLs: 1
+Globale_Variablen: 0
+END_LIBRARY

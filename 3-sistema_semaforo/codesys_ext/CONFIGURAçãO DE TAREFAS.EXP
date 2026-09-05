@@ -1,0 +1,9 @@
+
+RESOURCE
+{event_task : 'start','Called when program starts','','FUNCTION CallbackStart$R$NVAR_INPUT$R$N$TdwEvent: INT;$R$N$TdwFilter: INT;$R$N$TdwOwner: INT;$R$NEND_VAR$R$N'}{event_task_info : 0,1,34301}
+{event_task : 'stop','Called when program stops','','FUNCTION CallbackStop: DWORD$R$NVAR_INPUT$R$N$TdwEvent: INT;$R$N$TdwFilter: INT;$R$N$TdwOwner: INT;$R$NEND_VAR$R$N'}{event_task_info : 0,2,34301}
+{event_task : 'before_reset','Called before reset takes place','','FUNCTION CallbackReset: DWORD$R$NVAR_INPUT$R$N$TdwEvent: INT;$R$N$TdwFilter: INT;$R$N$TdwOwner: INT;$R$NEND_VAR$R$N'}{event_task_info : 0,3,34301}
+{event_task : 'after_reset','Called after reset took place','','FUNCTION CallbackAfterReset: DWORD$R$NVAR_INPUT$R$N$TdwEvent: INT;$R$N$TdwFilter: INT;$R$N$TdwOwner: INT;$R$NEND_VAR$R$N'}{event_task_info : 0,4,34301}
+{event_task : 'debug_loop','Debug loop at breakpoint','','FUNCTION CallbackDebugLoop: DWORD$R$NVAR_INPUT$R$N$TdwEvent: INT;$R$N$TdwFilter: INT;$R$N$TdwOwner: INT;$R$NEND_VAR$R$N'}{event_task_info : 0,31,34301}
+
+END_RESOURCE

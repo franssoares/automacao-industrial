@@ -1,0 +1,115 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows, calc}
+
+\begin{document}
+
+\section*{Modelagem Formal: Aut\^omato Finito Determin\'{\i}stico (AFD)}
+\subsection*{Sistema de Controle de Dois Sem\'aforos}
+
+O sistema de controle do cruzamento (Rua A e Rua B) operando com quatro temporizadores $T_1$, $T_2$, $T_3$ e $T_4$ (onde $T_1$ e $T_3$ s\~ao tempos de fluxo de 5s, e $T_2$ e $T_4$ s\~ao tempos de aten\c{c}\~ao de 2s) pode ser modelado formalmente como um Aut\^omato Finito Determin\'{\i}stico (AFD) definido pela qu\'{\i}ntupla:
+\[
+M = (Q, \Sigma, \delta, q_0, F)
+\]
+onde:
+
+\begin{itemize}
+    \item \textbf{Conjunto de Estados ($Q$):} Representa as fases operacionais do cruzamento.
+    \[
+    Q = \{S_0, S_1, S_2, S_3\}
+    \]
+    \begin{itemize}
+        \item $S_0$: Rua A Verde, Rua B Vermelho (Dispara $T_1$)
+        \item $S_1$: Rua A Amarelo, Rua B Vermelho (Dispara $T_2$)
+        \item $S_2$: Rua A Vermelho, Rua B Verde (Dispara $T_3$)
+        \item $S_3$: Rua A Vermelho, Rua B Amarelo (Dispara $T_4$)
+    \end{itemize}
+
+    \item \textbf{Alfabeto de Entrada ($\Sigma$):} Sinais bin\'arios oriundos das sa\'{\i}das $Q$ dos quatro temporizadores TON ($T_1, T_2, T_3, T_4$).
+    \[
+    \Sigma = \{t_{1q}=0, t_{1q}=1, t_{2q}=0, t_{2q}=1, t_{3q}=0, t_{3q}=1, t_{4q}=0, t_{4q}=1\}
+    \]
+
+    \item \textbf{Estado Inicial ($q_0$):} Estado de inicializa\c{c}\~ao do ciclo.
+    \[
+    q_0 = S_0
+    \]
+
+    \item \textbf{Conjunto de Estados Finais ($F$):} Como o processo do sem\'aforo \'e um ciclo cont\'{\i}nuo e infinito executado no CLP, n\~ao h\'a estado terminal de aceita\c{c}\~ao.
+    \[
+    F = \emptyset
+    \]
+
+    \item \textbf{Fun\c{c}\~ao de Transi\c{c}\~ao ($\delta$):} Mapeada graficamente e descrita pelas condi\c{c}\~oes de estouro de tempo.
+\end{itemize}
+
+\vspace{0.5cm}
+\subsection*{Diagrama de Transi\c{c}\~ao de Estados}
+
+\begin{center}
+\begin{tikzpicture}[
+    ->, 
+    >=stealth', 
+    shorten >=1pt, 
+    auto, 
+    node distance=4.8cm, 
+    semithick,
+    state/.style={circle, draw, minimum size=1.8cm, text centered, font=\small}
+]
+
+    % Definindo os Estados com as respectivas saidas das Ruas A e B
+    \node[state, initial, initial text=Start] (S0) {
+        \begin{tabular}{c}
+            \textbf{S0} \\ \hline
+            A: Verde \\ 
+            B: Vermelho \\ 
+            {\scriptsize Dispara $T_1$}
+        \end{tabular}
+    };
+
+    \node[state] (S1) [right of=S0] {
+        \begin{tabular}{c}
+            \textbf{S1} \\ \hline
+            A: Amarelo \\ 
+            B: Vermelho \\ 
+            {\scriptsize Dispara $T_2$}
+        \end{tabular}
+    };
+
+    \node[state] (S2) [below of=S1] {
+        \begin{tabular}{c}
+            \textbf{S2} \\ \hline
+            A: Vermelho \\ 
+            B: Verde \\ 
+            {\scriptsize Dispara $T_3$}
+        \end{tabular}
+    };
+
+    \node[state] (S3) [left of=S2] {
+        \begin{tabular}{c}
+            \textbf{S3} \\ \hline
+            A: Vermelho \\ 
+            B: Amarelo \\ 
+            {\scriptsize Dispara $T_4$}
+        \end{tabular}
+    };
+
+    % Transicoes do ciclo principal
+    \path (S0) edge [bend left=15] node {$t_{1q} = 1$} (S1)
+          (S1) edge [bend left=15] node {$t_{2q} = 1$} (S2)
+          (S2) edge [bend left=15] node {$t_{3q} = 1$} (S3)
+          (S3) edge [bend left=15] node {$t_{4q} = 1$} (S0);
+
+    % Loops de permanencia (enquanto o temporizador nao estoura)
+    \path (S0) edge [loop above] node {$t_{1q} = 0$} (S0)
+          (S1) edge [loop right] node {$t_{2q} = 0$} (S1)
+          (S2) edge [loop below] node {$t_{3q} = 0$} (S2)
+          (S3) edge [loop left]  node {$t_{4q} = 0$} (S3);
+
+\end{tikzpicture}
+\end{center}
+
+\end{document}
