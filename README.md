@@ -32,8 +32,6 @@ Os experimentos laboratoriais utilizam a maleta didática industrial **Training 
 
 ---
 
----
-
 ## Como Clonar, Configurar e Executar
 
 ### 1. Clonagem do Repositório
