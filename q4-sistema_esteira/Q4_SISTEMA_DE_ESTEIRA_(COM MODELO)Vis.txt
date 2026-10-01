@@ -1,0 +1,2 @@
+0
+c:\program files (x86)\altus\mastertool iec\compile\q4_sistema_de_esteira_(com modelo)vis.txt
